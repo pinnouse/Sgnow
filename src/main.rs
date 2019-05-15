@@ -1,19 +1,31 @@
-#![windows_subsystem = "windows"]
+extern crate azul;
 
-extern crate web_view;
+use azul::{prelude::*, widgets::{label::Label, button::Button}};
 
-use web_view::*;
+struct DataModel {
+    counter: usize,
+}
+
+impl Layout for DataModel {
+    fn layout(&self, _info: LayoutInfo<Self>) -> Dom<Self> {
+        let label = Label::new(format!("{}", self.counter)).dom();
+        let button = Button::with_label("Update counter").dom()
+            .with_callback(On::MouseUp, Callback(update_counter));
+
+            Dom::div()
+                .with_child(label)
+                .with_child(button)
+    }
+}
+
+
+fn update_counter(app_state: &mut AppState<DataModel>, _: &mut CallbackInfo<DataModel>) -> UpdateScreen {
+    app_state.data.modify(|state| state.counter += 1)?;
+    Redraw
+}
 
 fn main() {
-    println!("Hello, world!");
-    web_view::builder()
-        .title("Sgnow")
-        .content(Content::Url("https://gnowbros.com"))
-        .size(1280, 720)
-        .resizable(true)
-        .debug(true)
-        .user_data(())
-        .invoke_handler(|_webview, _arg| Ok(()))
-        .run()
-        .unwrap();
+    let mut app = App::new(DataModel { counter: 0 }, AppConfig::default()).unwrap();
+    let window = app.create_window(WindowCreateOptions::default(), css::native().unwrap());
+    app.run(window).unwrap();
 }
