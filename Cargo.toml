@@ -6,4 +6,6 @@ edition = "2018"
 
 [dependencies]
 
-azul = { git = "https://github.com/maps4print/azul", rev = "a6d58ae4fc8e2657981cc510d9f7fbcdc5af0023" }
+web-view = "0.4.1"
+dirs = "1.0.5"
+rodio = "0.8.1"
