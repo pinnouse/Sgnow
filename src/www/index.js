@@ -1,3 +1,0 @@
-$(function() {
-    $('span').innerHTML = "Hi";
-});

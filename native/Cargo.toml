@@ -1,0 +1,19 @@
+[package]
+name = "sgnow"
+version = "0.1.0"
+authors = ["pinnouse <cupofpho@gmail.com>"]
+license = "MIT"
+build = "build.rs"
+exclude = ["artifacts.json", "index.node"]
+
+[lib]
+name = "sgnow"
+crate-type = ["dylib"]
+
+[build-dependencies]
+neon-build = "0.2.0"
+cc = "1.0"
+
+[dependencies]
+neon = "0.2.0"
+rodio = "0.4.1"
