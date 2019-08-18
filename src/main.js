@@ -25,7 +25,7 @@ function createWindow() {
 
     win.loadFile('src/static/index.html');
 
-    require('lib/index');
+    require('../lib/index');
 }
 
 app.on('ready', createWindow);
